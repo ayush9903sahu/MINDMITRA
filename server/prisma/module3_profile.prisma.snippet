@@ -1,0 +1,64 @@
+// ============================================================================
+// MODULE 3 — Prisma schema additions
+// ----------------------------------------------------------------------------
+// This is NOT a standalone schema file. Copy the contents below into the
+// existing server/prisma/schema.prisma (the one Module 2 created), replacing
+// the placeholder `Profile` model that Module 2 left as a stand-in.
+//
+// Integration steps:
+//   1. Open server/prisma/schema.prisma.
+//   2. Delete the placeholder `model Profile { ... }` block (Module 2 added
+//      it only so the schema would compile; it is not the real shape).
+//   3. Paste the `enum Gender` and `model Profile` blocks below in its place.
+//   4. Add the back-relation to the existing `User` model:
+//        profile   Profile?
+//      (a single optional relation field — User already has `id String @id`
+//      which this depends on; do not rename User.id.)
+//   5. Run:
+//        npx prisma generate
+//        npx prisma migrate dev --name add_user_profile
+// ============================================================================
+
+enum Gender {
+  FEMALE
+  MALE
+  NON_BINARY
+  PREFER_NOT_TO_SAY
+  OTHER
+}
+
+model Profile {
+  id            String   @id @default(uuid())
+  userId        String   @unique
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  fullName      String
+  dateOfBirth   DateTime
+  gender        Gender   @default(PREFER_NOT_TO_SAY)
+  genderCustom  String?
+  contactEmail  String
+
+  addressLine1  String?
+  addressLine2  String?
+  city          String?
+  state         String?
+  postalCode    String?
+  country       String?
+
+  // Avatar is stored on disk (server/uploads/avatars/<userId>.<ext>), not in
+  // the DB. Only bookkeeping fields live here; the file is served through an
+  // authenticated route (see profile.controller.ts), never a public /static
+  // path, so avatar images stay behind the same privacy boundary as the rest
+  // of the profile.
+  avatarPath      String?
+  avatarMimeType  String?
+  avatarUpdatedAt DateTime?
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("profiles")
+}
+
+// --- Add to the existing `model User { ... }` block: ---
+//   profile   Profile?
