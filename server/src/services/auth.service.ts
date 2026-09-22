@@ -2,7 +2,7 @@ import bcrypt from "bcrypt";
 import type { User } from "@prisma/client";
 import { prisma } from "../utils/prisma";
 import { AppError } from "../middleware/errorHandler";
-import type { SafeUser } from "../../../shared/types/auth.types";
+import type { SafeUser } from "../../../../shared/types/auth.types";
 
 const SALT_ROUNDS = 12;
 

@@ -1,5 +1,5 @@
 import { Response } from "express";
-import { ApiResponse } from "../../../shared/types/api";
+import { ApiResponse } from "../../../../shared/types/api";
 
 export function sendSuccess<T>(res: Response, data: T, status = 200): void {
   const body: ApiResponse<T> = { success: true, data };

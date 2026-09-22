@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import type { JwtPayload } from "../../../shared/types/auth.types";
+import type { JwtPayload } from "../../../../shared/types/auth.types";
 import { env } from "./env";
 
 /**

@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { PagePlaceholder } from "./PagePlaceholder";
+  
 
 /** Placeholder — actual game rendering belongs to individual game modules. */
 export function GameDetailPage() {

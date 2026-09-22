@@ -1,6 +1,6 @@
 import multer from "multer";
 import { Request } from "express";
-import { AVATAR_UPLOAD } from "../../../shared/constants/profile.constants";
+import { AVATAR_UPLOAD } from "../../../../shared/constants/profile.constants";
 
 /**
  * Avatar uploads use memory storage: the file is validated and written to

@@ -8,7 +8,7 @@ import {
   ProfileNotFoundError,
 } from "../services/profile.service";
 import { updateProfileSchema } from "../utils/profile.validation";
-import { AVATAR_UPLOAD } from "../../../shared/constants/profile.constants";
+import { AVATAR_UPLOAD } from "../../../../shared/constants/profile.constants";
 
 /**
  * All handlers below assume `requireAuth` (Module 2) has already run and

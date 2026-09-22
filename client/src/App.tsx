@@ -1,23 +1,20 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import { ProtectedRoute } from "./components/ProtectedRoute";
+import { AppLayout } from "./components/layout/AppLayout";
+
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import DashboardPage from "./pages/DashboardPage";
+
+import { GamesPage } from "./pages/GamesPage";
+import { GameDetailPage } from "./pages/GameDetailPage";
+import { ProfilePage } from "./pages/ProfilePage";
+import { ProgressPage } from "./pages/ProgressPage";
+import { SettingsPage } from "./pages/SettingsPage";
+
 import { CLIENT_AUTH_PATHS } from "../../shared/constants/auth.constants";
 
-/**
- * INTEGRATION NOTE FOR MODULE 1:
- * Module 1 owns the overall navigation/layout shell (Dashboard, Games,
- * Progress, Profile, Settings) and should render its own <Routes> tree.
- * To integrate Module 2:
- *   1. Wrap your existing route tree with <AuthProvider>...</AuthProvider>.
- *   2. Add the /login and /register routes below (unprotected).
- *   3. Wrap every existing protected page element with <ProtectedRoute>.
- *   4. Replace the DashboardPage import here with Module 1's real one.
- *   5. Use useAuth() from src/hooks/useAuth.ts anywhere you need the
- *      current user or a logout action (see <LogoutButton /> for an example).
- */
 export default function App() {
   return (
     <AuthProvider>
@@ -27,16 +24,19 @@ export default function App() {
           <Route path={CLIENT_AUTH_PATHS.register} element={<RegisterPage />} />
 
           <Route
-            path={CLIENT_AUTH_PATHS.dashboard}
             element={
               <ProtectedRoute>
-                <DashboardPage />
+                <AppLayout />
               </ProtectedRoute>
             }
-          />
-
-          {/* Other modules add their own <Route> entries here, wrapped in
-              <ProtectedRoute> as needed. */}
+          >
+            <Route path={CLIENT_AUTH_PATHS.dashboard} element={<DashboardPage />} />
+            <Route path="/games" element={<GamesPage />} />
+            <Route path="/games/:gameId" element={<GameDetailPage />} />
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/progress" element={<ProgressPage />} />
+            <Route path="/settings" element={<SettingsPage />} />
+          </Route>
 
           <Route path="/" element={<Navigate to={CLIENT_AUTH_PATHS.dashboard} replace />} />
           <Route path="*" element={<Navigate to={CLIENT_AUTH_PATHS.dashboard} replace />} />
