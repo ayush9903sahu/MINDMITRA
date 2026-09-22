@@ -1,0 +1,96 @@
+// BrainCare Prisma schema
+// Module 2 (Authentication) owns the User model.
+// Other models below are declared as placeholders per the project-wide
+// data contract so that future modules (Profile, Games, Progress, Reminders)
+// can extend them without renaming or duplicating. Do NOT rename fields here
+// without updating shared/types and documenting the change.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ------------------------------------------------------------------
+// Owned by Module 2 (Authentication)
+// ------------------------------------------------------------------
+model User {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Relations to models owned by other modules. Kept optional/未implemented
+  // here; each owning module should add its own model definition and wire
+  // up the back-reference when it is built. Declared now so foreign keys
+  // are consistent once those modules exist.
+  profile      Profile?
+  gameSessions GameSession[]
+  reminder     Reminder?
+
+  @@map("users")
+}
+
+// ------------------------------------------------------------------
+// Placeholder models owned by FUTURE modules.
+// Do not implement business logic for these in Module 2.
+// Field names must match the project-wide data contract.
+// ------------------------------------------------------------------
+
+model Profile {
+  id           String    @id @default(uuid())
+  userId       String    @unique
+  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name         String?
+  dateOfBirth  DateTime?
+  age          Int?
+  gender       String?
+  address      String?
+  profileImage String?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  @@map("profiles")
+}
+
+model Game {
+  id           String        @id @default(uuid())
+  name         String
+  description  String
+  category     String
+  difficulty   String
+  gameSessions GameSession[]
+
+  @@map("games")
+}
+
+model GameSession {
+  id          String   @id @default(uuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  gameId      String
+  game        Game     @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  difficulty  String
+  score       Int
+  duration    Int
+  accuracy    Float?
+  completedAt DateTime @default(now())
+
+  @@map("game_sessions")
+}
+
+model Reminder {
+  id               String    @id @default(uuid())
+  userId           String    @unique
+  user             User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  enabled          Boolean   @default(false)
+  intervalHours    Int       @default(24)
+  preferredTime    String?
+  lastTriggeredAt  DateTime?
+
+  @@map("reminders")
+}
