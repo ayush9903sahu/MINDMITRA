@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { AVATAR_UPLOAD } from "../../../shared/constants/profile.constants";
+import { AVATAR_UPLOAD } from "../constants";
 import { avatarUrl } from "../services/profile.service";
 
 interface AvatarUploadProps {

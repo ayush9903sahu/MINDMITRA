@@ -1,5 +1,3 @@
-import { PagePlaceholder } from "./PagePlaceholder";
-
-export function ProgressPage() {
-  return <PagePlaceholder title="Progress" ownerModule="Progress" />;
-}
+import { BarChart3, Info } from "lucide-react";
+import { Card, EmptyState } from "../components/ui";
+export function ProgressPage(){return <div className="space-y-7" aria-labelledby="progress-title"><header><div className="flex items-center gap-3"><div className="rounded-2xl bg-indigo-50 p-3 text-indigo-700"><BarChart3/></div><div><h1 id="progress-title" className="text-3xl font-bold">Your progress</h1><p className="mt-1 text-slate-600">A simple place for future cognitive activity analytics.</p></div></div></header><div className="grid gap-5 md:grid-cols-3"><Card><p className="text-sm font-semibold uppercase tracking-wide text-slate-500">Games played</p><p className="mt-2 text-3xl font-bold">0</p></Card><Card><p className="text-sm font-semibold uppercase tracking-wide text-slate-500">Best score</p><p className="mt-2 text-3xl font-bold">—</p></Card><Card><p className="text-sm font-semibold uppercase tracking-wide text-slate-500">Completion</p><p className="mt-2 text-3xl font-bold">0%</p></Card></div><Card><div className="flex items-start gap-3"><Info className="mt-1 h-5 w-5 text-brand-600"/><div><h2 className="text-xl font-bold">Analytics placeholder</h2><p className="mt-1 text-slate-600">Real progress data will be connected when the game and progress modules are implemented. No fake user statistics are shown.</p></div></div></Card><EmptyState title="No activity yet" description="Complete a cognitive game session to see progress here."/></div>}

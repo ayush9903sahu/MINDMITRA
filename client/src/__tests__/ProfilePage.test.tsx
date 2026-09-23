@@ -3,7 +3,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { ProfilePage } from "../pages/ProfilePage";
 import * as profileService from "../services/profile.service";
-import { Gender } from "../../../shared/types/profile.types";
+import { Gender } from "../types/profile.types";
 
 // ASSUMPTION: matches the mocking pattern Module 2 used for auth.service.ts
 // in its own __tests__ (per the handoff, 13/13 frontend tests already pass

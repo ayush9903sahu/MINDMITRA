@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { Gender } from "../../../../shared/types/profile.types";
-import { MAX_AGE_YEARS, MIN_AGE_YEARS, PROFILE_FIELD_LIMITS } from "../../../../shared/constants/profile.constants";
+import { Gender } from "../../../shared/types/profile.types";
+import { MAX_AGE_YEARS, MIN_AGE_YEARS, PROFILE_FIELD_LIMITS } from "../../../shared/constants/profile.constants";
 import { computeAge } from "./age";
 
 /**

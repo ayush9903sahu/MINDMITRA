@@ -4,8 +4,8 @@ import {
   UpdateProfileInput,
   UpdateProfileResponse,
   UploadAvatarResponse,
-} from "../../../shared/types/profile.types";
-import { PROFILE_ROUTES } from "../../../shared/constants/profile.constants";
+} from "../types/profile.types";
+import { PROFILE_ROUTES } from "../constants";
 
 export async function fetchProfile(): Promise<GetProfileResponse> {
   return apiRequest<GetProfileResponse>(PROFILE_ROUTES.base, {

@@ -5,8 +5,7 @@ import { ApiError } from "../services/api";
 import { FormField } from "../components/FormField";
 import { PrimaryButton } from "../components/PrimaryButton";
 import { AlertBanner } from "../components/AlertBanner";
-import { CLIENT_AUTH_PATHS } from "../../../shared/constants/auth.constants";
-import { PASSWORD_MIN_LENGTH } from "../../../shared/constants/auth.constants";
+import { ROUTES, PASSWORD_MIN_LENGTH } from "../constants";
 
 export default function RegisterPage() {
   const { register } = useAuth();
@@ -32,7 +31,7 @@ export default function RegisterPage() {
     setIsSubmitting(true);
     try {
       await register(email, password, passwordConfirmation);
-      navigate(CLIENT_AUTH_PATHS.dashboard, { replace: true });
+      navigate(ROUTES.DASHBOARD, { replace: true });
     } catch (err) {
       if (err instanceof ApiError) {
         setFormError(err.message);
@@ -96,7 +95,7 @@ export default function RegisterPage() {
 
       <p className="mt-6 text-center text-lg text-gray-700">
         Already have an account?{" "}
-        <Link to={CLIENT_AUTH_PATHS.login} className="font-semibold text-brand-600 underline">
+        <Link to={ROUTES.LOGIN} className="font-semibold text-brand-600 underline">
           Log in
         </Link>
       </p>

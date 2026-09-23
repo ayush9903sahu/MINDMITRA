@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { CheckCircle2, Clock, Trophy } from "lucide-react";
 import { GameSummary } from "@/types";
-import { gameDetailPath } from "@shared/constants/routes";
+import { gameDetailPath } from "../../constants";
 import { DynamicIcon } from "./DynamicIcon";
 import { Card } from "./Card";
 

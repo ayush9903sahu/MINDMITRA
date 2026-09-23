@@ -1,6 +1,6 @@
 import { Brain } from "lucide-react";
 import { Link } from "react-router-dom";
-import { ROUTES } from "@shared/constants/routes";
+import { ROUTES } from "../../constants";
 
 /**
  * Top header. Includes a keyboard-only "skip to content" link (required for

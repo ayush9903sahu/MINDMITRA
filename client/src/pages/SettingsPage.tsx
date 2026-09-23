@@ -1,5 +1,4 @@
-import { PagePlaceholder } from "./PagePlaceholder";
-
-export function SettingsPage() {
-  return <PagePlaceholder title="Settings" ownerModule="Settings" />;
-}
+import { Settings,ShieldCheck,Bell,Palette } from "lucide-react";
+import { Card } from "../components/ui";
+import { LogoutButton } from "../components/LogoutButton";
+export function SettingsPage(){return <div className="space-y-7" aria-labelledby="settings-title"><header><div className="flex items-center gap-3"><div className="rounded-2xl bg-slate-100 p-3 text-slate-700"><Settings/></div><div><h1 id="settings-title" className="text-3xl font-bold">Settings</h1><p className="mt-1 text-slate-600">Manage your BrainCare experience.</p></div></div></header><div className="grid gap-5"><Card><div className="flex gap-4"><ShieldCheck className="h-6 w-6 text-emerald-600"/><div><h2 className="text-xl font-bold">Privacy &amp; security</h2><p className="mt-1 text-slate-600">Your profile is private and authentication uses the backend session cookie.</p></div></div></Card><Card><div className="flex gap-4"><Bell className="h-6 w-6 text-brand-600"/><div><h2 className="text-xl font-bold">Notifications</h2><p className="mt-1 text-slate-600">Notification preferences are reserved for a later module.</p></div></div></Card><Card><div className="flex gap-4"><Palette className="h-6 w-6 text-purple-600"/><div><h2 className="text-xl font-bold">Appearance</h2><p className="mt-1 text-slate-600">The accessible light theme is the current foundation design.</p></div></div></Card><Card><h2 className="text-xl font-bold">Account</h2><p className="mt-1 mb-4 text-slate-600">Sign out of this BrainCare session.</p><LogoutButton/></Card></div></div>}

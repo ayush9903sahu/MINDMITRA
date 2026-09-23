@@ -7,7 +7,7 @@ import { errorHandler, notFoundHandler } from "./middleware/errorHandler";
 export function createApp(): Express {
   const app = express();
 
-  app.use(cors({ origin: env.clientOrigin, credentials: true }));
+  app.use(cors({ origin: env.CLIENT_ORIGIN, credentials: true }));
   app.use(express.json());
 
   app.use("/api", apiRouter);

@@ -5,8 +5,8 @@ import { prisma } from "../utils/prisma";
 import { computeAge } from "../utils/age";
 import { sanitizeShallowObject } from "../utils/sanitize";
 import { UpdateProfileParsed } from "../utils/profile.validation";
-import { Profile } from "../../../../shared/types/profile.types";
-import { PROFILE_ROUTES } from "../../../../shared/constants/profile.constants";
+import { Profile } from "../../../shared/types/profile.types";
+import { PROFILE_ROUTES } from "../../../shared/constants/profile.constants";
 
 // Avatars live outside the Express static/public tree on purpose — see
 // uploadAvatar.middleware.ts and the controller for why they're served

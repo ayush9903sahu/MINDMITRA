@@ -5,7 +5,7 @@ import { ApiError } from "../services/api";
 import { FormField } from "../components/FormField";
 import { PrimaryButton } from "../components/PrimaryButton";
 import { AlertBanner } from "../components/AlertBanner";
-import { CLIENT_AUTH_PATHS } from "../../../shared/constants/auth.constants";
+import { ROUTES } from "../constants";
 
 interface LocationState {
   from?: { pathname: string };
@@ -31,7 +31,7 @@ export default function LoginPage() {
     try {
       await login(email, password);
       const state = location.state as LocationState | null;
-      const redirectTo = state?.from?.pathname || CLIENT_AUTH_PATHS.dashboard;
+      const redirectTo = state?.from?.pathname || ROUTES.DASHBOARD;
       navigate(redirectTo, { replace: true });
     } catch (err) {
       if (err instanceof ApiError) {
@@ -80,7 +80,7 @@ export default function LoginPage() {
 
       <p className="mt-6 text-center text-lg text-gray-700">
         Don&apos;t have an account?{" "}
-        <Link to={CLIENT_AUTH_PATHS.register} className="font-semibold text-brand-600 underline">
+        <Link to={ROUTES.REGISTER} className="font-semibold text-brand-600 underline">
           Create one
         </Link>
       </p>

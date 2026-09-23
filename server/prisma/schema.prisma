@@ -1,7 +1,8 @@
 // BrainCare Prisma schema
 // Module 2 (Authentication) owns the User model.
-// Other models below are declared as placeholders per the project-wide
-// data contract so that future modules (Profile, Games, Progress, Reminders)
+// Module 3 (Profile) owns the Profile model below.
+// Other models are declared as placeholders per the project-wide
+// data contract so that future modules (Games, Progress, Reminders)
 // can extend them without renaming or duplicating. Do NOT rename fields here
 // without updating shared/types and documenting the change.
 
@@ -24,10 +25,7 @@ model User {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
-  // Relations to models owned by other modules. Kept optional/未implemented
-  // here; each owning module should add its own model definition and wire
-  // up the back-reference when it is built. Declared now so foreign keys
-  // are consistent once those modules exist.
+  // Relations to models owned by other modules.
   profile      Profile?
   gameSessions GameSession[]
   reminder     Reminder?
@@ -36,26 +34,54 @@ model User {
 }
 
 // ------------------------------------------------------------------
-// Placeholder models owned by FUTURE modules.
-// Do not implement business logic for these in Module 2.
-// Field names must match the project-wide data contract.
+// Owned by Module 3 (Profile)
 // ------------------------------------------------------------------
+enum Gender {
+  FEMALE
+  MALE
+  NON_BINARY
+  PREFER_NOT_TO_SAY
+  OTHER
+}
 
 model Profile {
-  id           String    @id @default(uuid())
-  userId       String    @unique
-  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  name         String?
-  dateOfBirth  DateTime?
-  age          Int?
-  gender       String?
-  address      String?
-  profileImage String?
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
+  id           String   @id @default(uuid())
+  userId       String   @unique
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  fullName     String
+  dateOfBirth  DateTime
+  gender       Gender   @default(PREFER_NOT_TO_SAY)
+  genderCustom String?
+  contactEmail String
+
+  addressLine1 String?
+  addressLine2 String?
+  city         String?
+  state        String?
+  postalCode   String?
+  country      String?
+
+  // Avatar is stored on disk (server/uploads/avatars/<userId>.<ext>), not in
+  // the DB. Only bookkeeping fields live here; the file is served through an
+  // authenticated route (see profile.controller.ts), never a public /static
+  // path, so avatar images stay behind the same privacy boundary as the rest
+  // of the profile.
+  avatarPath      String?
+  avatarMimeType  String?
+  avatarUpdatedAt DateTime?
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
   @@map("profiles")
 }
+
+// ------------------------------------------------------------------
+// Placeholder models owned by FUTURE modules.
+// Do not implement business logic for these outside their own module.
+// Field names must match the project-wide data contract.
+// ------------------------------------------------------------------
 
 model Game {
   id           String        @id @default(uuid())
@@ -84,13 +110,13 @@ model GameSession {
 }
 
 model Reminder {
-  id               String    @id @default(uuid())
-  userId           String    @unique
-  user             User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  enabled          Boolean   @default(false)
-  intervalHours    Int       @default(24)
-  preferredTime    String?
-  lastTriggeredAt  DateTime?
+  id              String    @id @default(uuid())
+  userId          String    @unique
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  enabled         Boolean   @default(false)
+  intervalHours   Int       @default(24)
+  preferredTime   String?
+  lastTriggeredAt DateTime?
 
   @@map("reminders")
 }

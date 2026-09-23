@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LogOut } from "lucide-react";
 import { useAuth } from "../hooks/useAuth";
-import { CLIENT_AUTH_PATHS } from "../../../shared/constants/auth.constants";
+import { ROUTES } from "../constants";
 
 /**
  * Logout control intended for Module 1's navigation/header.
@@ -17,7 +17,7 @@ export function LogoutButton() {
     setIsLoggingOut(true);
     try {
       await logout();
-      navigate(CLIENT_AUTH_PATHS.login, { replace: true });
+      navigate(ROUTES.LOGIN, { replace: true });
     } finally {
       setIsLoggingOut(false);
     }

@@ -1,5 +1,5 @@
-import { Profile } from "../../../shared/types/profile.types";
-import { GENDER_OPTIONS } from "../../../shared/constants/profile.constants";
+import { Profile } from "../types/profile.types";
+import { GENDER_OPTIONS } from "../constants";
 import { avatarUrl } from "../services/profile.service";
 
 interface ProfileSummaryCardProps {

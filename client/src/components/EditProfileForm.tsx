@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
-import { Gender, Profile, ProfileValidationError, UpdateProfileInput } from "../../../shared/types/profile.types";
-import { GENDER_OPTIONS, PROFILE_FIELD_LIMITS } from "../../../shared/constants/profile.constants";
+import { Gender, Profile, ProfileValidationError, UpdateProfileInput } from "../types/profile.types";
+import { GENDER_OPTIONS, PROFILE_FIELD_LIMITS } from "../constants";
 // ASSUMPTION: Module 2 built these under client/src/components/ — reused
 // here rather than re-implemented, per the "reuse shared components" rule.
 // If their actual prop names differ from what's used below, the fix is
@@ -126,7 +126,7 @@ export function EditProfileForm({ initialProfile, isSaving, saveError, fieldErro
           name="fullName"
           type="text"
           value={form.fullName}
-          onChange={(v: string) => update("fullName", v)}
+          onValueChange={(v: string) => update("fullName", v)}
           error={errorFor("fullName")}
           required
           maxLength={PROFILE_FIELD_LIMITS.fullName.max}
@@ -139,7 +139,7 @@ export function EditProfileForm({ initialProfile, isSaving, saveError, fieldErro
             name="dateOfBirth"
             type="date"
             value={form.dateOfBirth}
-            onChange={(v: string) => update("dateOfBirth", v)}
+            onValueChange={(v: string) => update("dateOfBirth", v)}
             error={errorFor("dateOfBirth")}
             required
             max={new Date().toISOString().slice(0, 10)}
@@ -179,7 +179,7 @@ export function EditProfileForm({ initialProfile, isSaving, saveError, fieldErro
               name="genderCustom"
               type="text"
               value={form.genderCustom}
-              onChange={(v: string) => update("genderCustom", v)}
+              onValueChange={(v: string) => update("genderCustom", v)}
               error={errorFor("genderCustom")}
               maxLength={PROFILE_FIELD_LIMITS.genderCustom.max}
             />
@@ -191,7 +191,7 @@ export function EditProfileForm({ initialProfile, isSaving, saveError, fieldErro
           name="contactEmail"
           type="email"
           value={form.contactEmail}
-          onChange={(v: string) => update("contactEmail", v)}
+          onValueChange={(v: string) => update("contactEmail", v)}
           error={errorFor("contactEmail")}
           required
           maxLength={PROFILE_FIELD_LIMITS.contactEmail.max}
@@ -209,7 +209,7 @@ export function EditProfileForm({ initialProfile, isSaving, saveError, fieldErro
           name="addressLine1"
           type="text"
           value={form.addressLine1}
-          onChange={(v: string) => update("addressLine1", v)}
+          onValueChange={(v: string) => update("addressLine1", v)}
           error={errorFor("addressLine1")}
           maxLength={PROFILE_FIELD_LIMITS.addressLine1.max}
           autoComplete="address-line1"
@@ -219,7 +219,7 @@ export function EditProfileForm({ initialProfile, isSaving, saveError, fieldErro
           name="addressLine2"
           type="text"
           value={form.addressLine2}
-          onChange={(v: string) => update("addressLine2", v)}
+          onValueChange={(v: string) => update("addressLine2", v)}
           error={errorFor("addressLine2")}
           maxLength={PROFILE_FIELD_LIMITS.addressLine2.max}
           autoComplete="address-line2"
@@ -230,7 +230,7 @@ export function EditProfileForm({ initialProfile, isSaving, saveError, fieldErro
             name="city"
             type="text"
             value={form.city}
-            onChange={(v: string) => update("city", v)}
+            onValueChange={(v: string) => update("city", v)}
             error={errorFor("city")}
             maxLength={PROFILE_FIELD_LIMITS.city.max}
             autoComplete="address-level2"
@@ -240,7 +240,7 @@ export function EditProfileForm({ initialProfile, isSaving, saveError, fieldErro
             name="state"
             type="text"
             value={form.state}
-            onChange={(v: string) => update("state", v)}
+            onValueChange={(v: string) => update("state", v)}
             error={errorFor("state")}
             maxLength={PROFILE_FIELD_LIMITS.state.max}
             autoComplete="address-level1"
@@ -250,7 +250,7 @@ export function EditProfileForm({ initialProfile, isSaving, saveError, fieldErro
             name="postalCode"
             type="text"
             value={form.postalCode}
-            onChange={(v: string) => update("postalCode", v)}
+            onValueChange={(v: string) => update("postalCode", v)}
             error={errorFor("postalCode")}
             maxLength={PROFILE_FIELD_LIMITS.postalCode.max}
             autoComplete="postal-code"
@@ -260,7 +260,7 @@ export function EditProfileForm({ initialProfile, isSaving, saveError, fieldErro
             name="country"
             type="text"
             value={form.country}
-            onChange={(v: string) => update("country", v)}
+            onValueChange={(v: string) => update("country", v)}
             error={errorFor("country")}
             maxLength={PROFILE_FIELD_LIMITS.country.max}
             autoComplete="country-name"

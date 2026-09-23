@@ -13,15 +13,15 @@ import { ProfilePage } from "./pages/ProfilePage";
 import { ProgressPage } from "./pages/ProgressPage";
 import { SettingsPage } from "./pages/SettingsPage";
 
-import { CLIENT_AUTH_PATHS } from "../../shared/constants/auth.constants";
+import { ROUTES } from "./constants";
 
 export default function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          <Route path={CLIENT_AUTH_PATHS.login} element={<LoginPage />} />
-          <Route path={CLIENT_AUTH_PATHS.register} element={<RegisterPage />} />
+          <Route path={ROUTES.LOGIN} element={<LoginPage />} />
+          <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
 
           <Route
             element={
@@ -30,7 +30,7 @@ export default function App() {
               </ProtectedRoute>
             }
           >
-            <Route path={CLIENT_AUTH_PATHS.dashboard} element={<DashboardPage />} />
+            <Route path={ROUTES.DASHBOARD} element={<DashboardPage />} />
             <Route path="/games" element={<GamesPage />} />
             <Route path="/games/:gameId" element={<GameDetailPage />} />
             <Route path="/profile" element={<ProfilePage />} />
@@ -38,8 +38,8 @@ export default function App() {
             <Route path="/settings" element={<SettingsPage />} />
           </Route>
 
-          <Route path="/" element={<Navigate to={CLIENT_AUTH_PATHS.dashboard} replace />} />
-          <Route path="*" element={<Navigate to={CLIENT_AUTH_PATHS.dashboard} replace />} />
+          <Route path="/" element={<Navigate to={ROUTES.DASHBOARD} replace />} />
+          <Route path="*" element={<Navigate to={ROUTES.DASHBOARD} replace />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
